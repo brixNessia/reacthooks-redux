@@ -9,6 +9,7 @@ import { createBrowserHistory } from 'history';
 import { useSelector } from 'react-redux';
 
 import routes from './routes';
+import Loader from 'common/Loader/Loader';
 
 const history = createBrowserHistory();
 
@@ -36,7 +37,7 @@ function Public(props) {
     <Route
       {...rest}
       render={props => (
-        <Suspense fallback={<div>....Loading</div>}>
+        <Suspense fallback={<Loader />}>
           <Layout>
             <Component {...props} />
           </Layout>
@@ -48,8 +49,9 @@ function Public(props) {
 
 function Private(props) {
   const auth = useSelector(state => state.auth);
-  const { path, component, ...rest } = props;
+  const { path, component, layout, ...rest } = props;
   const Component = lazy(() => import(`../${component}`));
+  const Layout = lazy(() => import(`../layout/${layout}`));
 
   if (!auth.isAuthenticated) {
     return (
@@ -68,8 +70,10 @@ function Private(props) {
     <Route
       {...rest}
       render={props => (
-        <Suspense fallback={<div>....Loading</div>}>
-          <Component {...props} />
+        <Suspense fallback={<Loader />}>
+          <Layout>
+            <Component {...props} />
+          </Layout>
         </Suspense>
       )}
     />

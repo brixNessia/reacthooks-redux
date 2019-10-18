@@ -8,7 +8,7 @@ function Default(props) {
   return (
     <div>
       <TopPage />
-      <main>{children}</main>
+      {children}
     </div>
   );
 }
