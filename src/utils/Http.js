@@ -14,27 +14,8 @@ Http.interceptors.response.use(
       return alert('A network error occurred.');
     }
 
-    switch (error.response.status) {
-      case 401:
-        /**
-         * When session is available but the server responds with 401,
-         * this means that the token has expired. We will attempt
-         * to refresh the token.
-         */
-        break;
-      case 500:
-      case 562:
-      case 563:
-      case 567:
-      case 568:
-      case 570:
-        /**
-         * Handle the exceptions when the server
-         * responsds with error messages
-         */
-        break;
-      default:
-        break;
+    if (error.response.status) {
+      console.log('ERROR', error.response.status);
     }
 
     return Promise.reject(error);

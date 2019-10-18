@@ -1,14 +1,10 @@
-function ReduxThunk(extraArgument) {
+function ReduxThunk() {
   return ({ dispatch, getState }) => next => action => {
     if (typeof action === 'function') {
-      return action(dispatch, getState, extraArgument);
+      return action(dispatch, getState);
     }
-
     return next(action);
   };
 }
 
-const thunk = ReduxThunk();
-thunk.withExtraArgument = ReduxThunk;
-
-export default thunk;
+export default ReduxThunk;

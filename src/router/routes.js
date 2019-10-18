@@ -11,7 +11,7 @@ export default [
   },
   {
     path: '/',
-    component: '',
-    auth: true,
+    component: 'modules/home/pages/Home',
+    layout: 'Default',
   },
 ];

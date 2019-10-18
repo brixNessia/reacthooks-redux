@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import routes from './routes';
 import Loader from 'common/Loader/Loader';
@@ -79,5 +80,10 @@ function Private(props) {
     />
   );
 }
+
+Public.propTypes = {
+  layout: PropTypes.string.isRequired,
+  component: PropTypes.string.isRequired,
+};
 
 export default Router;
